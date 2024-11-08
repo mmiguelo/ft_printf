@@ -6,18 +6,18 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 19:07:05 by mmiguelo          #+#    #+#             */
-/*   Updated: 2024/11/08 12:13:06 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:24:49 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_args(va_list args, const char *specifier)
+int	print_args(va_list args, const char specifier)
 {
 	if (specifier == 'c')
 		return (ft_putchar(va_arg(args, int)));
 	if (specifier == 's')
-		return (ft_putstr(va_arg(args, int)));
+		return (ft_putstr(va_arg(args, char *)));
 	if (specifier == 'p')
 		return (ft_putptr(va_arg(args, int)));
 	if (specifier == 'd' || specifier == 'i')
@@ -45,14 +45,14 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%' && str[i + 1] != '\0')
 			count += print_args(args, str[++i]);
 		else
-			count += print_char(str[i]);
+			count += ft_putchar(str[i]);
 		i++;
 	}
 	va_end(args);
 	return (count);
 }
 
-/* int main()
+int main()
 {
     char c = 'k'; // %c
     char *str = "String test"; // %s
@@ -72,4 +72,4 @@ int	ft_printf(const char *str, ...)
     i = printf("| TEST TEXT |\n| Single Char: %c |\n| String: %s |\n| Pointer Adress: %p |\n| Decimal: %d |\n| Integer %i |\n| Unsign deci: %u |\n| HexLower: %x |\n| HexUpper: %X |\n| Percentage sign: %% |\n", c, str, var, nbr, nbr, nbrr, b, b);
     printf("\nReturn Value: %d", i);
     return (0);
-} */
+}

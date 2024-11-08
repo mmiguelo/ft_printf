@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:31:07 by mmiguelo          #+#    #+#             */
-/*   Updated: 2024/11/08 12:15:00 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:24:00 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ static unsigned int	ft_intlenght(unsigned int n)
 
 int	ft_pututoa(unsigned int n)
 {
-	int	*str;
-	int	lenght;
-	int	i;
-	int	result;
+	char	*str;
+	int		lenght;
+	int		result;
 
 	result = 0;
 	lenght = ft_intlenght(n);
