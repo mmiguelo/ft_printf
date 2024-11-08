@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 19:07:05 by mmiguelo          #+#    #+#             */
-/*   Updated: 2024/11/08 14:13:48 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:16:31 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_printf(const char *str, ...)
 	return (count);
 }
 
-int main()
+/* int main()
 {
     char c = 'k'; // %c
     char *str = "String test"; // %s
@@ -78,4 +78,4 @@ int main()
 	sign: %% |\n", c, str, var, nbr, nbr, nbrr, b, b);
     printf("\nReturn Value: %d", i);
     return (0);
-}
+} */
