@@ -6,7 +6,7 @@
 #    By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 18:31:55 by mmiguelo          #+#    #+#              #
-#    Updated: 2024/11/07 18:59:02 by mmiguelo         ###   ########.fr        #
+#    Updated: 2024/11/08 11:29:47 by mmiguelo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS = ft_printf.c \
 		ft_putnbr.c \
 		ft_puthex.c \
 		ft_putptr.c \
+		ft_pututoa.c \
 
 
 OBJ = $(SRCS:.c=.o)

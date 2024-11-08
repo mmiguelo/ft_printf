@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 19:07:05 by mmiguelo          #+#    #+#             */
-/*   Updated: 2024/11/07 18:59:28 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:04:38 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	print_args(va_list args, const char *specifier)
 	if (specifier == 'd' || specifier == 'i')
 		return (ft_putnbr(va_arg(args, int)));
 	if (specifier == 'u')
-		return (ft_put)
+		return (ft_pututoa(va_arg(args, unsigned int)));
 	if (specifier == 'x' || specifier == 'X')
 		return (ft_puthex(va_arg(args, int), specifier));
 	if (specifier == '%')
