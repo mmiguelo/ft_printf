@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 19:07:05 by mmiguelo          #+#    #+#             */
-/*   Updated: 2024/11/08 14:16:31 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:20:32 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,25 @@ int	ft_printf(const char *str, ...)
     char c = 'k'; // %c
     char *str = "String test"; // %s
     
-    int nbr = 5;// %d // %i
+    int nbr = -5;// %d // %i
 	int *var; var = &nbr;// %p
     unsigned int nbrr = 20;// %u
     int b= 0xffffffff;// %x // %X
     // %%
     int i;
-	ft_printf("He%clo\n%s!\n%x\n%%\n", 'l', "World", -42);
-    printf("Printf replica:\n");
-    i = ft_printf("| TEST TEXT |\n| Single Char: %c |\n| String: %s |\n|\
-	Pointer Adress: %p |\n| Decimal: %d |\n| Integer %i |\n| Unsign \
-	deci: %u |\n| HexLower: %x |\n| HexUpper: %X |\n| Percentage sign:\
-	%% |\n", c, str, var, nbr, nbr, nbrr, b, b);
+	ft_printf("He%clo\n%s!\n%x\n%%", 'l', "World", -42);
+    printf("\n\nPrintf replica:\n");
+    i = ft_printf("| TEST TEXT |\n| Single Char: %c |\n| String: %s |\
+	\n| Pointer Adress: %p |\n| Decimal: %d |\n| Integer %i |\
+	\n| Unsign deci: %u |\n| HexLower: %x |\n| HexUpper: %X |\
+	\n| Percentage sign: %% |\n", c, str, var, nbr, nbr, nbrr, b, b);
     printf("\nReturn Value: %d", i);
     ///////////////////////////////
     printf("\nPrintf original:\n");
-    i = printf("| TEST TEXT |\n| Single Char: %c |\n| String: %s |\n|\
-	Pointer Adress: %p |\n| Decimal: %d |\n| Integer %i |\n| Unsign\
-	deci: %u |\n| HexLower: %x |\n| HexUpper: %X |\n| Percentage\
-	sign: %% |\n", c, str, var, nbr, nbr, nbrr, b, b);
-    printf("\nReturn Value: %d", i);
+    i = printf("| TEST TEXT |\n| Single Char: %c |\n| String: %s |\
+	\n| Pointer Adress: %p |\n| Decimal: %d |\n| Integer %i |\
+	\n| Unsign deci: %u |\n| HexLower: %x |\n| HexUpper: %X |\
+	\n| Percentage sign: %% |\n", c, str, var, nbr, nbr, nbrr, b, b);
+    printf("\nReturn Value: %d\n", i);
     return (0);
 } */

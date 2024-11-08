@@ -6,7 +6,7 @@
 #    By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 18:31:55 by mmiguelo          #+#    #+#              #
-#    Updated: 2024/11/08 11:29:47 by mmiguelo         ###   ########.fr        #
+#    Updated: 2024/11/08 15:03:47 by mmiguelo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,9 @@
 #==============================================================================#
 
 NAME = libftprintf.a
-CC = gcc
+CC = cc
 CFLAGS = -Werror -Wall -Wextra -g
 RM = rm -f
-LIBFT = libft.a
 
 
 #==============================================================================#
@@ -27,12 +26,12 @@ LIBFT = libft.a
 #==============================================================================#
 
 SRCS = ft_printf.c \
-		ft_putchar.c \
-		ft_putstr.c \
-		ft_putnbr.c \
-		ft_puthex.c \
-		ft_putptr.c \
-		ft_pututoa.c \
+	ft_putchar.c \
+	ft_putstr.c \
+	ft_putnbr.c \
+	ft_puthex.c \
+	ft_putptr.c \
+	ft_pututoa.c
 
 
 OBJ = $(SRCS:.c=.o)
@@ -44,7 +43,8 @@ OBJ = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME):
+		$(CC) $(CFLAGS) -c $(SRCS)
 		ar rcs $(NAME) $(OBJ)
 
 clean:
@@ -53,4 +53,6 @@ clean:
 fclean: clean
 		$(RM) $(NAME)
 
-re: clean all
+re: fclean all
+
+.PHONY:	all clean fclean re
