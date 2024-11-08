@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:54:29 by mmiguelo          #+#    #+#             */
-/*   Updated: 2024/11/07 18:46:33 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:13:58 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_putnbr(int n)
 {
-	int result;
+	int	result;
 
 	result = 0;
 	if (n == -2147483648)
