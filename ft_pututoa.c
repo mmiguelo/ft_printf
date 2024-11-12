@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:31:07 by mmiguelo          #+#    #+#             */
-/*   Updated: 2024/11/08 13:44:33 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:53:21 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ static unsigned int	ft_intlenght(unsigned int n)
 	int	count;
 
 	count = 0;
+	if (n <= 0)
+		count++;
 	while (n != 0)
 	{
-		count++;
 		n = n / 10;
+		count++;
 	}
 	return (count);
 }
@@ -28,18 +30,21 @@ static unsigned int	ft_intlenght(unsigned int n)
 int	ft_pututoa(unsigned int n)
 {
 	char	*str;
-	int		lenght;
+	size_t	lenght;
 	int		result;
 
 	result = 0;
 	lenght = ft_intlenght(n);
-	str = malloc(sizeof(char) * (lenght + 1));
+	str = (char *)malloc(sizeof(char) * (lenght + 1));
 	if (!str)
 		return (0);
-	str[lenght--] = '\0';
+	str[lenght] = '\0';
+	if (n == 0)
+		str[0] = '0';
 	while (n != 0)
 	{
-		str[lenght--] = (n % 10) + 48;
+		lenght--;
+		str[lenght] = (n % 10) + 48;
 		n = n / 10;
 	}
 	result = ft_putstr(str);

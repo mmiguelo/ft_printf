@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 13:54:29 by mmiguelo          #+#    #+#             */
-/*   Updated: 2024/11/12 17:11:08 by mmiguelo         ###   ########.fr       */
+/*   Created: 2024/10/21 11:50:08 by mmiguelo          #+#    #+#             */
+/*   Updated: 2024/10/22 15:06:00 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr(int n)
+/**
+ * @brief Outputs the string ’s’ to the given file descriptor 
+ * followed by a newline.
+ * 
+ * @param s The string to output.
+ * @param fd The file descriptor on which to write.
+ */
+void	ft_putendl_fd(char *s, int fd)
 {
-	int		length;
-	char	*num;
-
-	length = 0;
-	num = ft_itoa(n);
-	length = ft_putstr(num);
-	free(num);
-	return (length);
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }
+
+/* int main()
+{
+	int fd = open("teste.txt", O_CREAT | O_WRONLY, 0777);
+	ft_putendl_fd("teste", fd);
+} */

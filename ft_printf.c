@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 19:07:05 by mmiguelo          #+#    #+#             */
-/*   Updated: 2024/11/08 15:20:32 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:54:09 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	print_args(va_list args, const char specifier)
 	if (specifier == 's')
 		return (ft_putstr(va_arg(args, char *)));
 	if (specifier == 'p')
-		return (ft_putptr(va_arg(args, unsigned long)));
+		return (ft_putptr(va_arg(args, void *)));
 	if (specifier == 'd' || specifier == 'i')
 		return (ft_putnbr(va_arg(args, int)));
 	if (specifier == 'u')

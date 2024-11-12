@@ -1,43 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 13:49:09 by mmiguelo          #+#    #+#             */
-/*   Updated: 2024/11/12 17:06:21 by mmiguelo         ###   ########.fr       */
+/*   Created: 2024/10/25 14:13:34 by mmiguelo          #+#    #+#             */
+/*   Updated: 2024/10/28 14:41:13 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	ft_printstr( char *str)
+int	ft_lstsize(t_list *lst)
 {
-	int	i;
+	int		i;
+	t_list	*temp;
 
+	if (!lst)
+		return (0);
 	i = 0;
-	while (str[i])
+	temp = lst;
+	while (temp)
 	{
-		write(1, &str[i], 1);
 		i++;
-	}
-}
-
-int	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str == NULL)
-	{
-		ft_printstr("(null)");
-		return (6);
-	}
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
+		temp = temp->next;
 	}
 	return (i);
 }
+
+/* int	main(void)
+{
+	t_list	*head;
+
+	head = ft_lstnew(NULL);
+	ft_lstadd_front(&head, ft_lstnew(NULL));
+	ft_lstadd_front(&head, ft_lstnew(NULL));
+	printf("%d\n", ft_lstsize(head));
+	free(head->next->next);
+	free(head->next);
+	free(head);
+	return (0);
+} */

@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 13:54:29 by mmiguelo          #+#    #+#             */
-/*   Updated: 2024/11/12 17:11:08 by mmiguelo         ###   ########.fr       */
+/*   Created: 2024/10/21 11:49:04 by mmiguelo          #+#    #+#             */
+/*   Updated: 2024/10/23 10:46:17 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr(int n)
+/**
+ * @brief Outputs the character ’c’ to the given file descriptor.
+ * 
+ * @param c The character to output.
+ * @param fd The file descriptor on which to write.
+ */
+void	ft_putchar_fd(char c, int fd)
 {
-	int		length;
-	char	*num;
-
-	length = 0;
-	num = ft_itoa(n);
-	length = ft_putstr(num);
-	free(num);
-	return (length);
+	write(fd, &c, 1);
 }
+/* int main()
+{
+	int fd = open("teste", O_CREAT | O_WRONLY, 0777);
+	ft_putchar_fd('m', fd);
+} */

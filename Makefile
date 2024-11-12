@@ -36,6 +36,9 @@ SRCS = ft_printf.c \
 
 OBJ = $(SRCS:.c=.o)
 
+LIBFT_DIR 	= ./libft
+LIBFT		= ./libft/libft.a
+
 
 #==============================================================================#
 #                                    RULES                                     #
@@ -43,14 +46,26 @@ OBJ = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME):
-		$(CC) $(CFLAGS) -c $(SRCS)
-		ar rcs $(NAME) $(OBJ)
+$(NAME): $(LIBFT) $(OBJ)
+	@echo "Compiling $(NAME)"
+	@cp $(LIBFT) $(NAME)
+	ar rcs $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	
+$(LIBFT): $(LIBFT_DIR)
+	@echo "Compiling libft"
+	@$(MAKE) -C $(LIBFT_DIR)
+	
+%.o: $(SRC)/%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "Compiling $<"
 
 clean:
+		@$(MAKE) clean -C $(LIBFT_DIR)
 		$(RM) $(OBJ)
 
 fclean: clean
+		@$(MAKE) fclean -C $(LIBFT_DIR)
 		$(RM) $(NAME)
 
 re: fclean all
