@@ -94,11 +94,11 @@ int  ft_printf(const char *str, ...);
 ┌──────────────────────────────────────────────────┐
 │              Parse format string                 │
 │                                                  │
-│   'H' 'e' 'l' 'l' 'o' ' '  → write directly    │
+│   'H' 'e' 'l' 'l' 'o' ' '  → write directly      │
 │                                                  │
 │   '%s'  → call ft_putstr(va_arg)                 │
 │                                                  │
-│   ','  ' ' 'y' 'o' 'u' ...  → write directly    │
+│   ','  ' ' 'y' 'o' 'u' ...  → write directly     │
 │                                                  │
 │   '%d'  → call ft_putnbr(va_arg)                 │
 │                                                  │
