@@ -23,7 +23,7 @@
 - [About](#-about)
 - [Supported Specifiers](#-supported-specifiers)
 - [Function Prototype](#-function-prototype)
-- [How It Works](#-how-it-works)
+- [How It Works](#%EF%B8%8F-how-it-works)
 - [Project Files](#-project-files)
 - [Helper Functions](#-helper-functions)
 - [Getting Started](#-getting-started)
@@ -85,7 +85,7 @@ int  ft_printf(const char *str, ...);
 
 ---
 
-## 🛠️ How It Works
+## ⚙️ How It Works
 
 ```
  ft_printf("Hello %s, you are %d years old!\n", name, age)
