@@ -10,7 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-
 #==============================================================================#
 #                                    NAMES                                     #
 #==============================================================================#
@@ -19,7 +18,6 @@ NAME = libft.a
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
 RM = rm -f
-
 
 #==============================================================================#
 #                                    FILES                                     #
@@ -74,6 +72,9 @@ BONUS = ft_lstnew.c \
 
 BONUS_OBJ = $(BONUS:.c=.o)
 
+TOTAL = $(words $(OBJ))
+CURRENT = 0
+
 
 #==============================================================================#
 #                                    RULES                                     #
@@ -82,17 +83,49 @@ BONUS_OBJ = $(BONUS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		ar rcs $(NAME) $(OBJ)
+	@ar rcs $(NAME) $(OBJ)
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(eval CURRENT=$(shell expr $(CURRENT) + 1))
+	@$(eval PERCENT=$(shell expr $(CURRENT) \* 100 / $(TOTAL)))
+	@printf "\r\033[K["
+	@i=0; while [ $$i -lt $(shell expr $(PERCENT) / 2) ]; do printf "█"; i=$$((i + 1)); done
+	@i=$(shell expr $(PERCENT) / 2); while [ $$i -lt 50 ]; do printf "░"; i=$$((i + 1)); done
+	@if [ $(PERCENT) -eq 100 ]; then printf "] 100%%\n"; else printf "] %3d%%" $(PERCENT); fi
 
 bonus: $(BONUS) all $(BONUS_OBJ)
-		ar rcs $(NAME) $(OBJ) $(BONUS_OBJ)
+	@ar rcs $(NAME) $(OBJ) $(BONUS_OBJ)
 
 clean:
 		$(RM) $(OBJ) $(BONUS_OBJ)
 
-fclean: clean
-		$(RM) $(NAME)
+fclean:
+	@printf $(BRED)"Cleaning libft\n"$(RST)
+	@i=0; \
+	while [ $$i -le 50 ]; do \
+		printf "\r\033[K["; \
+		j=0; \
+		while [ $$j -lt $$i ]; do \
+			printf "█"; \
+			j=$$((j + 1)); \
+		done; \
+		while [ $$j -lt 50 ]; do \
+			printf "░"; \
+			j=$$((j + 1)); \
+		done; \
+		printf "] %3d%%" $$((i * 2)); \
+		sleep 0.02; \
+		i=$$((i + 1)); \
+	done
+	@printf "\n"
+	@$(RM) $(OBJ) $(BONUS_OBJ) $(NAME)
 
 re: clean all
 
 PHONY: all clean fclean re
+
+
+#colors
+BRED 	= "\033[31;1m"
+RST 	= "\033[0m"
