@@ -32,7 +32,11 @@ MANDATORY += ft_puthex.c
 MANDATORY += ft_putptr.c
 MANDATORY += ft_pututoa.c
 
-BONUS = bonus.c
+BONUS = ft_printf_bonus.c
+BONUS += utils/parser.c
+BONUS += utils/precedences.c
+BONUS += utils/utils.c
+
 
 SRC = $(MANDATORY)
 SRC_BONUS = $(BONUS)
@@ -67,10 +71,8 @@ $(LIBFT):
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 	@echo $(BGRN)"✨Libft compilation completed✨"$(RST)
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-
-$(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ $(INCLUDES)
 
 $(NAME): $(LIBFT) $(OBJS)
@@ -93,7 +95,7 @@ $(NAME): $(LIBFT) $(OBJS)
 val: all
 	@$(VAL) ./$(NAME)
 
-bonus: $(NAME) $(LIBFT) $(OBJS_BONUS)
+bonus: $(LIBFT) $(OBJS_BONUS)
 	@cp $(LIBFT) $(NAME)
 	@ar rcs $(NAME) $(OBJS_BONUS)
 	@ranlib $(NAME)
