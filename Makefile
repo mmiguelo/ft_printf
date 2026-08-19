@@ -36,6 +36,7 @@ BONUS = ft_printf_bonus.c
 BONUS += utils/parser.c
 BONUS += utils/precedences.c
 BONUS += utils/utils.c
+BONUS += conversion/outputs.c
 
 
 SRC = $(MANDATORY)

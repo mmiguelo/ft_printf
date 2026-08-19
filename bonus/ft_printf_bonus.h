@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 14:39:19 by mmiguelo          #+#    #+#             */
-/*   Updated: 2026/08/18 16:21:53 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2026/08/19 14:27:09 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../libft/libft.h"
 
 # define FLAGS "-0#+ "
-# define SPECIFIERS "cspdiuxX%"
+# define SPECIFIERS "fcspdiuxX%"
 # define HEX_LOWER "0123456789abcdef"
 # define HEX_UPPER "0123456789ABCDEF"
 # define DECIMAL "0123456789"
@@ -41,6 +41,7 @@ void    ft_parse_width_bonus(t_format *fmt, const char **str);
 void    ft_parse_precision_bonus(t_format *fmt, const char **str);
 bool    ft_parse_specifier_bonus(t_format *fmt, const char **str);
 void    ft_resolve_flag_priorities_bonus(t_format *fmt);
+int     ft_dispatch_conversion_bonus(t_format *fmt, va_list args);
 int	    ft_printf_bonus(const char *str, ...);
 int     ft_putchar(const char c);
 int	    ft_kill_bonus(const char *str);

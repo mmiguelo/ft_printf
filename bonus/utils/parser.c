@@ -78,5 +78,6 @@ bool    ft_parse_format_bonus(t_format *fmt, const char **str)
     ft_parse_precision_bonus(fmt, str);
     if (!ft_parse_specifier_bonus(fmt, str))
         return false;
+    ft_resolve_flag_priorities_bonus(fmt);
     return true;
 }

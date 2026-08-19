@@ -1,5 +1,6 @@
 //#include "mandatory/ft_printf.h"
 #include "bonus/ft_printf_bonus.h"
+#include <stdio.h>
 
 // int main()
 // {
@@ -28,3 +29,8 @@
 //     printf("\nReturn Value: %d\n", i);
 //     return (0);
 // }
+
+int main() {
+    printf("teste: %j\n");
+    printf("teste 1: %%j\n");
+}

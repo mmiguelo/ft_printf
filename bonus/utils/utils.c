@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 14:23:19 by mmiguelo          #+#    #+#             */
-/*   Updated: 2026/08/18 16:46:52 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2026/08/19 14:10:27 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,4 @@ int	ft_kill_bonus(const char *str)
 {
     write(2, str, ft_strlen(str));
 	exit(EXIT_FAILURE);
-}
-
-int ft_putchar(const char c)
-{
-    write(1, &c, 1);
-    return 1;
 }

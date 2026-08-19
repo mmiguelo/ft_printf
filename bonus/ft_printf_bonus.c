@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 14:42:20 by mmiguelo          #+#    #+#             */
-/*   Updated: 2026/08/18 16:22:13 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2026/08/19 14:09:35 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	ft_printf_bonus(const char *str, ...)
 			str++;
 			ft_init_format_bonus(&fmt);
 			if (ft_parse_format_bonus(&fmt, &str))
-				write(1, "ola", 3);
-				//count += ft_print_args_bonus(&fmt, args);
+				count += ft_dispatch_conversion_bonus(&fmt, args);
 		}
 		else if (*str != '%') {
 			count += ft_putchar(*str);

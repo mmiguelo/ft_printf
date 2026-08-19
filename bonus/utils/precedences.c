@@ -6,12 +6,13 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 15:49:44 by mmiguelo          #+#    #+#             */
-/*   Updated: 2026/08/18 16:43:41 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2026/08/19 14:26:00 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf_bonus.h"
 
+//check if there is priorities in case of floats
 void ft_resolve_flag_priorities_bonus(t_format *fmt)
 {
     if (!fmt)
@@ -30,3 +31,4 @@ void ft_resolve_flag_priorities_bonus(t_format *fmt)
         fmt->space_flag = false;
     }
 }
+
