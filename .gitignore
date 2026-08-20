@@ -2,3 +2,4 @@ test
 *.o
 *.d
 *.a
+a.out

@@ -33,10 +33,10 @@ MANDATORY += ft_putptr.c
 MANDATORY += ft_pututoa.c
 
 BONUS = ft_printf_bonus.c
-BONUS += utils/parser.c
-BONUS += utils/precedences.c
-BONUS += utils/utils.c
-BONUS += conversion/outputs.c
+BONUS += utils/parser_bonus.c
+BONUS += utils/helpers_bonus.c
+BONUS += utils/print_nbr_utils_bonus.c
+BONUS += conversion/outputs_bonus.c
 
 
 SRC = $(MANDATORY)

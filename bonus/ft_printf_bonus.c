@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 14:42:20 by mmiguelo          #+#    #+#             */
-/*   Updated: 2026/08/19 14:09:35 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2026/08/20 19:24:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_printf_bonus(const char *str, ...)
 				count += ft_dispatch_conversion_bonus(&fmt, args);
 		}
 		else if (*str != '%') {
-			count += ft_putchar(*str);
+			count += ft_putchar_fd(*str, 1);
 			str++;
 		}
 		else
