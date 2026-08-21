@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 14:11:36 by mmiguelo          #+#    #+#             */
-/*   Updated: 2026/08/19 14:35:29 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2026/08/21 10:58:02 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int ft_dispatch_conversion_bonus(t_format *fmt, va_list args)
             return (print_nbr(fmt, va_arg(args, unsigned int), HEX_U, false));
         if (fmt->specifier == 'p')
             return (print_ptr(fmt, va_arg(args, void *)));
-        if (fmt->specifier == 'f')
-            return (print_float_bonus(fmt, va_arg(args, double)));
+        //if (fmt->specifier == 'f')
+        //    return (print_float_bonus(fmt, va_arg(args, double)));
         return (0);
     }
 }

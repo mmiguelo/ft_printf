@@ -37,6 +37,7 @@ SRCS =	ft_bzero.c \
 		ft_memcpy.c \
 		ft_memmove.c \
 		ft_memset.c \
+		ft_putchar.c \
 		ft_putchar_fd.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \
@@ -56,11 +57,8 @@ SRCS =	ft_bzero.c \
 		ft_strtrim.c \
 		ft_substr.c \
 		ft_tolower.c \
-		ft_toupper.c
-
-OBJ = $(SRCS:.c=.o)
-
-BONUS = ft_lstnew.c \
+		ft_toupper.c \
+		ft_lstnew.c \
 		ft_lstadd_front.c \
 		ft_lstsize.c \
 		ft_lstlast.c \
@@ -70,7 +68,7 @@ BONUS = ft_lstnew.c \
 		ft_lstiter.c \
 		ft_lstmap.c
 
-BONUS_OBJ = $(BONUS:.c=.o)
+OBJ = $(SRCS:.c=.o)
 
 TOTAL = $(words $(OBJ))
 CURRENT = 0
@@ -93,9 +91,6 @@ $(NAME): $(OBJ)
 	@i=0; while [ $$i -lt $(shell expr $(PERCENT) / 2) ]; do printf "█"; i=$$((i + 1)); done
 	@i=$(shell expr $(PERCENT) / 2); while [ $$i -lt 50 ]; do printf "░"; i=$$((i + 1)); done
 	@if [ $(PERCENT) -eq 100 ]; then printf "] 100%%\n"; else printf "] %3d%%" $(PERCENT); fi
-
-bonus: $(BONUS) all $(BONUS_OBJ)
-	@ar rcs $(NAME) $(OBJ) $(BONUS_OBJ)
 
 clean:
 		$(RM) $(OBJ) $(BONUS_OBJ)
