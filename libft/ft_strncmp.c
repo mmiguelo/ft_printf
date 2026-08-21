@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:02:37 by mmiguelo          #+#    #+#             */
-/*   Updated: 2024/10/30 16:56:46 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2026/08/21 17:01:04 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	printf("%d", ft_strncmp(s1, s2, n)); //should be 0
 	printf("\nComparing s1 and s3 which are different strings:\n");
 	printf("%d", ft_strncmp(s1, s3, n)); // should be positive
-	printf("\nComparing s1 and s4 which are different\
-	lenghts (same content in first 3 chars):\n");
+	printf("\nComparing s1 and s4:\n");
 	printf("%d", ft_strncmp(s1, s4, n)); // should be negative
 } */

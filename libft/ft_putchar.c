@@ -6,13 +6,13 @@
 /*   By: mmiguelo <mmiguelo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 11:00:51 by mmiguelo          #+#    #+#             */
-/*   Updated: 2026/08/21 11:08:23 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2026/08/21 16:59:46 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_putchar(int c)
+int	ft_putchar(int c)
 {
-    return (write(1, &c, 1));
+	return (write(1, &c, 1));
 }
