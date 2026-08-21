@@ -1,261 +1,166 @@
-<a id="readme-top"></a>
+*This project has been created as part of the 42 curriculum by mmiguelo.*
 
-<div align="center">
+# ft_printf
 
-# 🖨️ ft_printf
+## Description
 
-**A custom implementation of the C `printf` function | 42 School Project**
+This project is a custom implementation of the standard C function `printf`. The goal is to reproduce the essential behavior of formatted output while handling variadic arguments, parsing a format string, and writing the result to the standard output.
 
-[![42 School](https://img.shields.io/badge/42-School-000000?style=for-the-badge&logo=42&logoColor=white)](https://42.fr)
-[![Language](https://img.shields.io/badge/Language-C-00599C?style=for-the-badge&logo=c&logoColor=white)](https://en.wikipedia.org/wiki/C_(programming_language))
-[![Norminette](https://img.shields.io/badge/Norm-OK-brightgreen?style=for-the-badge)](https://github.com/42School/norminette)
+The project is a classic 42 exercise: it teaches how to work with variadic functions, how format strings are parsed, how different data types are converted into text, and how the return value of `printf` is computed.
 
----
+### Mandatory part
 
-*Because `write()` alone just isn't enough — a variadic function that handles formatted output to stdout.*
+The mandatory version implements the core conversions expected from a basic `printf` clone:
 
-</div>
+- `%c` for a single character
+- `%s` for a string
+- `%p` for a pointer address
+- `%d` and `%i` for signed integers
+- `%u` for unsigned integers
+- `%x` and `%X` for hexadecimal output
+- `%%` for a literal percent sign
 
----
+The function returns the total number of characters printed, matching the behavior of the real `printf` for the supported cases.
 
-## 📖 Table of Contents
+### Bonus part
 
-- [About](#-about)
-- [Supported Specifiers](#-supported-specifiers)
-- [Function Prototype](#-function-prototype)
-- [How It Works](#%EF%B8%8F-how-it-works)
-- [Project Files](#-project-files)
-- [Helper Functions](#-helper-functions)
-- [Getting Started](#-getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#-usage)
-- [Examples](#-examples)
-- [Author](#-author)
+The bonus version extends the parser with additional formatting features inspired by the real `printf` behavior. It adds support for:
 
----
+- `-`, `0`, `#`, `+`, and space flags
+- minimum field width
+- precision using `.`
+- better handling of signed/unsigned numeric formatting and padding rules
 
-## 🧠 About
+This part keeps the same core design but introduces a more structured parsing step and a dedicated format state so more advanced formatting rules can be applied without losing clarity.
 
-**ft_printf** is a reimplementation of the standard C library function `printf(3)`. It parses a format string, processes variadic arguments, and writes formatted output to `stdout` — returning the total number of characters printed.
+## Algorithm and data structures
 
-This project is a key milestone in the 42 curriculum, reinforcing:
+The mandatory version follows a simple and effective flow. The function walks through the format string from left to right. When it encounters a normal character, it is written directly to the output. When it encounters `%`, it reads the following character as a conversion specifier and dispatches the matching printing function.
 
-- **Variadic functions** (`va_start`, `va_arg`, `va_end`)
-- **Type dispatching** based on format specifiers
-- Recursive algorithms for **number-to-string** conversion (decimal, hex, pointer)
-- Building a **static library** (`.a`) with `ar` and `ranlib`
-- Integration with a previously built **libft**
+Each conversion function is responsible for converting a value into a string and writing it to the standard output using `write()`. The total number of printed characters is accumulated and returned at the end. This is the key behavior that makes the function compatible with the standard `printf` contract.
 
----
+The heart of the algorithm is therefore a parser-dispatch model:
 
-## 🔣 Supported Specifiers
+1. scan the format string
+2. detect a conversion marker `%`
+3. select the correct output function from the specifier
+4. convert the associated argument to text
+5. write the text and increment the counter
+6. continue until the whole string is processed
 
-<div align="center">
+This pattern is easy to reason about and reliable in a 42 context because it is direct, modular, and explicit.
 
-| Specifier | Description | Example Input | Example Output |
-|:---------:|:------------|:--------------|:---------------|
-| `%c` | Single character | `'A'` | `A` |
-| `%s` | String | `"Hello"` | `Hello` |
-| `%p` | Pointer address | `&var` | `0x7ffeeb4c` |
-| `%d` | Signed decimal integer | `-42` | `-42` |
-| `%i` | Signed integer (same as `%d`) | `42` | `42` |
-| `%u` | Unsigned decimal integer | `4294967295` | `4294967295` |
-| `%x` | Hexadecimal (lowercase) | `255` | `ff` |
-| `%X` | Hexadecimal (uppercase) | `255` | `FF` |
-| `%%` | Literal percent sign | — | `%` |
+In the bonus version, the parser becomes more structured. A `t_format` structure stores the current conversion state, including:
 
-</div>
+- active flags
+- width value
+- precision value
+- conversion specifier
 
----
+The parsing happens in stages:
 
-## 🔧 Function Prototype
+1. parse flags
+2. parse width if present
+3. parse precision if present
+4. parse the specifier
+5. resolve flag conflicts and precedence
+6. dispatch to the correct output function
 
-```c
-int  ft_printf(const char *str, ...);
-```
+This data structure is useful because formatting is not independent from one field to another. For example, precision and width both affect numeric output, and some flags must be ignored or prioritized depending on the specifier. The code resolves these cases before printing so the final output matches the expected formatting rules as closely as possible.
 
-| Parameter | Description |
-|:----------|:------------|
-| `str` | Format string containing text and `%` specifiers |
-| `...` | Variadic arguments matching each specifier |
-| **Return** | Total number of characters printed, or `-1` on error |
+For numeric values, the implementation uses base-aware conversion. Integers are converted by repeated division using a digit table, while hexadecimal values choose either lowercase or uppercase characters depending on the conversion. Padding is handled separately so width and precision remain consistent and predictable.
 
-> Behaves identically to `printf(3)` for the supported conversions.
+This design is robust because it separates parsing, conversion, and formatting into distinct responsibilities. The parser decides what to do, the conversion functions produce the text, and the padding logic manages alignment and spacing.
 
----
+## Instructions
 
-## ⚙️ How It Works
+### Requirements
 
-```
- ft_printf("Hello %s, you are %d years old!\n", name, age)
-     │
-     ▼
-┌──────────────────────────────────────────────────┐
-│              Parse format string                 │
-│                                                  │
-│   'H' 'e' 'l' 'l' 'o' ' '  → write directly      │
-│                                                  │
-│   '%s'  → call ft_putstr(va_arg)                 │
-│                                                  │
-│   ','  ' ' 'y' 'o' 'u' ...  → write directly     │
-│                                                  │
-│   '%d'  → call ft_putnbr(va_arg)                 │
-│                                                  │
-│   '!' '\n'               → write directly        │
-└──────────────────────────────────────────────────┘
-     │
-     ▼
-  Returns: total characters written
-```
+- A Unix-like environment
+- `make`
+- `cc` or `gcc`
+- the local `libft` project available in the repository
 
-1. Iterate through the format string character by character
-2. On regular characters → write directly to `stdout`
-3. On `%` → read the next character as a **specifier**
-4. Dispatch to the matching helper function via `print_args()`
-5. Each helper returns the number of characters it printed
-6. Accumulate and return the **total count**
+### Mandatory compilation
 
----
-
-## 📂 Project Files
-
-```
-ft_printf/
-├── 📄 Makefile              # Build system (produces libftprintf.a)
-├── 📖 README.md
-├── ft_printf.h              # Header: prototypes & includes
-├── ft_printf.c              # Core: format parsing & specifier dispatch
-├── ft_putchar.c             # %c  — single character
-├── ft_putstr.c              # %s  — string (handles NULL)
-├── ft_putnbr.c              # %d %i — signed integer (uses ft_itoa)
-├── ft_pututoa.c             # %u  — unsigned integer
-├── ft_puthex.c              # %x %X — hexadecimal (lower/upper)
-├── ft_putptr.c              # %p  — pointer address (0x prefix)
-└── libft/                   # Custom C library dependency
-    ├── libft.h
-    ├── Makefile
-    └── *.c                  # 40+ utility functions
-```
-
----
-
-## 🔗 Helper Functions
-
-Each specifier is handled by a dedicated function:
-
-| Function | Specifier | Strategy |
-|:---------|:---------:|:---------|
-| `ft_putchar` | `%c` | Direct `write()` of a single byte |
-| `ft_putstr` | `%s` | Iterates and writes each char; prints `(null)` for `NULL` |
-| `ft_putnbr` | `%d` `%i` | Converts via `ft_itoa` from libft, then prints the string |
-| `ft_pututoa` | `%u` | Manual unsigned-to-string conversion with `malloc` |
-| `ft_puthex` | `%x` `%X` | Recursive division by 16 using `"0123456789abcdef"` or uppercase base |
-| `ft_putptr` | `%p` | Prints `0x` prefix + recursive hex of the `unsigned long` address; `(nil)` for `NULL` |
-
-> All functions return the number of characters printed for accurate count tracking.
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- **GCC** or **CC** compiler
-- **Make**
-
-### Installation
+From the project root, run:
 
 ```bash
-# Clone the repository
-git clone https://github.com/mmiguelo/ft_printf.git
-cd ft_printf
-
-# Build the library
 make
 ```
 
-This produces `libftprintf.a` — a static library ready to link.
+This builds the static library `libftprintf.a`.
 
----
-
-## 🎯 Usage
-
-### Compiling with your project
+### Bonus compilation
 
 ```bash
-# Compile your program linking ft_printf and libft
-cc -Wall -Wextra -Werror main.c -L. -lftprintf -o my_program
+make bonus
 ```
 
-### Including in your code
+### Cleaning up
+
+```bash
+make clean
+make fclean
+make re
+```
+
+### Example test compilation
+
+```bash
+cc -Wall -Wextra -Werror -Imandatory -Ibonus -I. main.c ./libftprintf.a -o test
+./test
+```
+
+## Usage
+
+A simple example of use is:
 
 ```c
-#include "ft_printf.h"
+#include "mandatory/ft_printf.h"
 
 int main(void)
 {
-    ft_printf("Hello, %s!\n", "World");
-    ft_printf("Number: %d\n", 42);
+    ft_printf("Hello %s!\n", "42");
+    ft_printf("Character: %c\n", 'A');
+    ft_printf("Integer: %d\n", -42);
+    ft_printf("Unsigned: %u\n", 42u);
     ft_printf("Hex: %x\n", 255);
-    ft_printf("Pointer: %p\n", &main);
+    ft_printf("Pointer: %p\n", (void *)0x1234);
     return (0);
 }
 ```
 
----
-
-## 💡 Examples
+The bonus version supports formatting modifiers such as width and precision, for example:
 
 ```c
-// Characters and strings
-ft_printf("Char: %c\n", 'A');              // Char: A
-ft_printf("String: %s\n", "Hello");        // String: Hello
-ft_printf("Null: %s\n", NULL);             // Null: (null)
-
-// Numbers
-ft_printf("Decimal: %d\n", -42);           // Decimal: -42
-ft_printf("Unsigned: %u\n", 4294967295);   // Unsigned: 4294967295
-
-// Hexadecimal
-ft_printf("Lower: %x\n", 255);            // Lower: ff
-ft_printf("Upper: %X\n", 255);            // Upper: FF
-
-// Pointer
-ft_printf("Ptr: %p\n", &var);             // Ptr: 0x7ffeeb4c
-
-// Escape percent
-ft_printf("100%%\n");                      // 100%
-
-// Return value = number of characters printed
-int n = ft_printf("Hi!\n");               // prints "Hi!\n", n = 4
+ft_printf_bonus("[%10.5s] [%-10.5s] [%#x]\n", "Hello", "Hello", 255);
 ```
 
----
+## Resources
 
-## 🛠️ Makefile Targets
+### References
 
-| Command | Description |
-|:--------|:------------|
-| `make` | Build `libftprintf.a` (includes libft) |
-| `make clean` | Remove object files |
-| `make fclean` | Remove object files and library |
-| `make re` | Full recompile |
+- C library documentation for `printf`
+- `man 3 printf`
+- tutorials covering variadic functions, width/precision rules, and hexadecimal conversions
+- documentation on pointer formatting and signed/unsigned integer conversion
 
----
+### AI usage
 
-## 👤 Author
+AI tools were used mainly to support the development process in a few specific areas:
 
-**mmiguelo** — 42 Student
+- checking the behavior of edge cases for signed and unsigned integers
+- validating the correct parsing of flags, width, and precision in the bonus version
+- reviewing how formatting rules should interact between `-`, `0`, `+`, and space flags
+- helping debug conversion and padding logic for `%x`, `%X`, `%p`, and `%s`
+- comparing the project output against the expected semantics of the standard `printf`
 
-[![GitHub](https://img.shields.io/badge/GitHub-mmiguelo-181717?style=for-the-badge&logo=github)](https://github.com/mmiguelo)
+The AI was used as a support tool for reasoning and debugging, not as a substitute for understanding the project itself. The final implementation was adapted and validated by the author according to the constraints of the 42 assignment.
 
----
+## Notes
 
-<div align="center">
+This project is meant to strengthen fundamental C skills while staying within the rules and scope of the 42 curriculum. It is especially valuable for learning how variable arguments are handled, how text formatting is parsed, and how low-level output functions can be used to produce reliable formatted strings.
 
-*Made with ❤️ at 42*
-
-<p>(<a href="#readme-top">⬆️ back to top</a>)</p>
 
 </div>
