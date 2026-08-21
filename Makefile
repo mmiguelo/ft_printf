@@ -188,6 +188,3 @@ BGBBLU	= "\033[104m"
 BGBMAG	= "\033[105m"
 BGBCYA	= "\033[106m"
 BGBWHI	= "\033[107m"
-
-#cc -Wall -Wextra -Werror -Imandatory -Ibonus -I. main.c ./libftprintf.a -o test
-#./test
